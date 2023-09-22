@@ -138,6 +138,14 @@ class PythonProjectInstaller:
             if not repo_dir or not self.is_python_project(repo_dir):
                 self._abort_installation(f"The repository at {self.url} does not appear to be a Python project.")
             
+            requirements_file = os.path.join(repo_dir, 'requirements.txt')
+            setup_file = os.path.join(repo_dir, 'setup.py')
+            
+            # If neither requirements.txt nor setup.py exist, finish the installation.
+            if not os.path.isfile(requirements_file) and not os.path.isfile(setup_file):
+                print('No requirements.txt and setup.py found. Installation complete.')
+                return
+            
             venv_dir = self.create_venv(repo_dir)
             if not venv_dir:
                 self._abort_installation(f"Error: Failed to create virtual environment in {repo_dir}")
@@ -154,6 +162,7 @@ class PythonProjectInstaller:
         except Exception as e:
             print(f"Error: {e}")
             print('Installation Failed.')
+
 
 def main():
     """
