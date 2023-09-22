@@ -19,7 +19,9 @@ if exist %TOOL_DIR% (
 )
 
 :: activate the virtual environment
-call "%VENV_DIR%\Scripts\activate"
+if exist %VENV_DIR%\Scripts\activate.bat (
+    call "%VENV_DIR%\Scripts\activate"
+)
 
 :: run the tool
 autocite %*
