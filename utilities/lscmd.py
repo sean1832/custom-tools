@@ -24,7 +24,7 @@ def list_files(directory):
     
 def main():
     parser = argparse.ArgumentParser(description='List custom commands')
-    parser.add_argument('-d', '--directory', type=str, default='C:\_PATH\custom-tools', help='Directory to list the files from')
+    parser.add_argument('-d', '--directory', type=str, help='Directory to list the files from')
     args = parser.parse_args()
 
     files = list_files(args.directory)
