@@ -66,12 +66,9 @@ class PythonProjectInstaller:
             print('Virtual environment already exists.')
             return venv_dir
         
-        if self._user_confirmation('Virtual environment does not exist locally. Do you want to create it? (y/n)'):
-            os.system(f'python -m venv {venv_dir}')
-            print(f'Virtual environment created at {venv_dir}.')
-            return venv_dir
-        else:
-            self._abort_installation('Virtual environment not created')
+        os.system(f'python -m venv {venv_dir}')
+        print(f'Virtual environment created at {venv_dir}.')
+        return venv_dir
     
     def install_requirements_and_setup(self, repo_dir, venv_dir):
         """
@@ -84,14 +81,14 @@ class PythonProjectInstaller:
         
         requirements_file = os.path.join(repo_dir, 'requirements.txt')
         install_requirements_cmd = ""
-        if os.path.isfile(requirements_file) and self._user_confirmation('Requirements.txt found. Do you want to install? (y/n)'):
+        if os.path.isfile(requirements_file):
             install_requirements_cmd = f' && {os.path.join(venv_dir, "Scripts", "pip")} install -r {requirements_file}'
             self.create_stamp(repo_dir, 'installed')
             print('Requirements installed')
         
         setup_file = os.path.join(repo_dir, 'setup.py')
         install_setup_cmd = ""
-        if os.path.isfile(setup_file) and self._user_confirmation('setup.py found. Do you want to install? (y/n)'):
+        if os.path.isfile(setup_file):
             # Changing to the repository directory before running pip install .
             install_setup_cmd = f' && cd {repo_dir} && {os.path.join(venv_dir, "Scripts", "pip")} install .'
             self.create_stamp(repo_dir, 'installed')
