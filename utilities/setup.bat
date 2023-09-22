@@ -40,9 +40,24 @@ if errorlevel 1 (
     echo Error: Failed to write to config file.
     exit /b 1
 )
+echo Wrote config file to %CONFIG_FILE%
+
+:: create a new virtual environment
+python -m venv venv
+
+:: activate the virtual environment
+call ".\venv\Scripts\activate"
+
+:: upgrade pip
+python -m pip install --upgrade pip
+
+:: install dependencies
+pip install -r requirements.txt
+
 
 :: Print success message
-echo Wrote config file to %CONFIG_FILE%
+echo ================================================================
+echo venv created successfully.
 echo Setup complete. Please add "%SCRIPT_PARENT_DIR%" to your PATH.
 echo ================================================================
 echo Note you must install the following dependencies:
@@ -50,4 +65,4 @@ echo     - Python 3.9 or higher
 echo     - Git
 
 :: End of script
-exit /b 0
+pause
