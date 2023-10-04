@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 
 :: change here
 set PROJECT_NAME=cli-convert-img
-set GIT_URL=https://github.com/sean1832/cli-convert-img/releases/download/0.0.2/convert-image-cs.zip
+set GIT_URL=https://github.com/sean1832/cli-convert-img/releases/download/0.0.2/convert-image-cs-x64.zip
 
 set ROOT_DIR=%~dp0
 set TOOL_DIR=%ROOT_DIR%\code\%PROJECT_NAME%
